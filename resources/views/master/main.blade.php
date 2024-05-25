@@ -2,6 +2,8 @@
 <html class="no-js" lang="en">
     
 <head>
+    <base href="/"> 
+<!-- ăn css -->
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>@yield('title')</title>
@@ -66,9 +68,14 @@
                             <div class="header-top-right">
                                 <div class="header-top-menu">
                                     <ul class="list-wrap">
-                                        <li><a href="contact.html">Help</a></li>
-                                        <li><a href="contact.html">Support</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        @if(auth('cus')->check())
+                                        <li><a href="{{ route('account.profile') }}">Hi {{ auth('cus')->user()->name }}</a></li>
+                                        <li><a href="{{ route('account.change_password') }}">Change password</a></li>
+                                        <li><a href="{{ route('account.logout') }}">Logout</a></li>
+                                        @else
+                                        <li><a href="{{ route('account.login') }}">Login</a></li>
+                                        <li><a href="{{ route('account.register') }}">Register</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <div class="header-top-social">
